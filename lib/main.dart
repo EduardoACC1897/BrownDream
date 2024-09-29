@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/main_screen.dart'; // Asegúrate de importar el archivo que contiene MainScreen
+import 'pages/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BrownDream',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
+        fontFamily: 'Nunito', // Fuente global para la App
         useMaterial3: true,
       ),
-      home: const MainScreen(title: 'BrownDream'), // Establece MainScreen como la página inicial
+      home: const MainScreen(title: 'BrownDream'), // MainScreen como la página inicial
     );
   }
 }
-

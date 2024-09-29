@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+// Página Inicio
+class InicioPage extends StatefulWidget {
+  const InicioPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<InicioPage> createState() => _InicioPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _InicioPageState extends State<InicioPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -21,15 +22,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        //title: Text(widget.title),
-      ),
-        body: Center(
+      body: Container(
+        color: const Color(0xFFE6B68B), // Color de fondo
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('You have pushed the button this many times on Perfil Page:'),
+              const Text('You have pushed the button this many times on Home Page:'),
               Text(
                 '$_counter',
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -37,6 +36,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Asegúrate de importar las páginas que creaste
+import 'inicio_page.dart'; // Asegúrate de importar las páginas que creaste
 import 'recetas_page.dart';
 import 'perfil_page.dart';
 
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> { // Cambio del nombre del esta
 
   // Lista de las páginas que se mostrarán en el BottomNavigationBar
   static const List<Widget> _pages = <Widget>[
-    HomePage(title: 'Home'),
+    InicioPage(title: 'Home'),
     RecetasPage(title: 'Recetas'),
     PerfilPage(title: 'Perfil'),
   ];
@@ -32,15 +32,21 @@ class _MainScreenState extends State<MainScreen> { // Cambio del nombre del esta
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: const Color(0xFF8D4925),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Color(0xFFFFFFFF)),
+        ),
       ),
       body: _pages[_selectedIndex], // Cambia la pantalla según el índice seleccionado
+
+      // Implementación del BottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xFF8D4925),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Inicio',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_cafe),
@@ -52,8 +58,8 @@ class _MainScreenState extends State<MainScreen> { // Cambio del nombre del esta
           ),
         ],
         currentIndex: _selectedIndex, // Establece el índice actual
-        selectedItemColor: Colors.brown[800], // Cambia el color del ítem seleccionado
-        onTap: _onItemTapped, // Cambia el índice cuando se toca un ítem
+        selectedItemColor: const Color(0xFFFFFFFF), // Color del ítem seleccionado
+        onTap: _onItemTapped, // Establece el nuevo índice cuando se presiona un ítem
       ),
     );
   }

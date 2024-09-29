@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Página Perfil
 class PerfilPage extends StatefulWidget {
   const PerfilPage({super.key, required this.title});
 
@@ -21,20 +22,19 @@ class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        //title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times on Perfil Page:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: Container(
+        color: const Color(0xFFE6B68B), // Color de fondo
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('You have pushed the button this many times on Perfil Page:'),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
