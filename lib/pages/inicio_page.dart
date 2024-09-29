@@ -23,15 +23,18 @@ class _InicioPageState extends State<InicioPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color(0xFFE6B68B), // Color de fondo
+        color: const Color(0xFFCD966C), // Color de fondo
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('You have pushed the button this many times on Home Page:'),
+              const Text(
+                'You have pushed the button this many times on Inicio Page:',
+                style: TextStyle(color: Colors.white), // Color blanco texto
+              ),
               Text(
                 '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white), // Color blanco texto
               ),
             ],
           ),
