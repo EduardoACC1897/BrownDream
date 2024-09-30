@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
 import 'comentario_page.dart';
+import 'producto_page.dart';
 
 // Página RecetaDetail
 class RecetaDetailPage extends StatefulWidget {
@@ -110,7 +111,7 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                 ),
                 // Botón de compartir
                 IconButton(
-                  icon: const Icon(Icons.share, color: Colors.white), // Ícono de compartir
+                  icon: const Icon(Icons.share, color: Colors.white),
                   onPressed: () {
                     // Acción al compartir la receta
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -136,26 +137,28 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                       color: Colors.white, // Color blanco para el texto
                     ),
                   ),
-                  // Icono de editar
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.white), // Icono de editar
-                    onPressed: () {
-                      // Acción al presionar el icono de editar
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Editando receta')),
-                      );
-                    },
-                  ),
-                  // Icono de borrar
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.white), // Icono de borrar
-                    onPressed: () {
-                      // Acción al presionar el icono de borrar
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Receta borrada')),
-                      );
-                    },
-                  ),
+                  if(widget.receta.propietario == "Eduardo Cabezas") ...{
+                    // Botón de editar
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.white),
+                      onPressed: () {
+                        // Acción al presionar el icono de editar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Editando receta')),
+                        );
+                      },
+                    ),
+                    // Botón  de borrar
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.white),
+                      onPressed: () {
+                        // Acción al presionar el icono de borrar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Receta borrada')),
+                        );
+                      },
+                    ),
+                  }
                 ],
               ),
             ],
@@ -243,6 +246,41 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               '- $paso',
               style: const TextStyle(color: Colors.white), // Color blanco para el texto
             )),
+            const SizedBox(height: 16.0),
+            // Mostrar recetas recomendadas
+            const Text(
+              'Producto Recomendadas',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+              if (widget.receta.productosRecomendados.isNotEmpty) ...[
+                ...widget.receta.productosRecomendados.map((producto) => ListTile(
+                  title: Text(producto.nombre, style: const TextStyle(color: Colors.white)),
+                  subtitle: Text('Tipo: ${producto.tipo}', style: const TextStyle(color: Colors.white)),
+                  leading: Image.asset(producto.imagen, width: 50, height: 50, fit: BoxFit.cover),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductoPage(
+                          producto: producto,
+                        ),
+                      ),
+                    );
+                  },
+                )),
+              ] else ...[
+                const Text(
+                  'No hay productos recomendados.',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+              const SizedBox(height: 16.0),
+
           ],
         ),
       ),

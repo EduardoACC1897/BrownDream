@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
 import '/models/comentario.dart';
+import '/models/producto.dart';
 import 'receta_detail_page.dart';
 
 // Página Receta
@@ -59,6 +60,15 @@ class _RecetasPageState extends State<RecetasPage> {
           autor: 'María Rodríguez',
           texto: 'Un poco dulce para mi gusto, pero sigue siendo bueno.',
           fechaCreacion: DateTime(2023, 5, 22, 12, 30),
+        ),
+      ],
+      productosRecomendados: [
+        Producto(
+          id: '1',
+          imagen: 'assets/images/jarabe_de_vainilla.png',
+          nombre: 'Jarabe de Vainilla',
+          tipo: 'Saborizante',
+          descripcion: 'Un jarabe dulce y aromático que añade un toque de vainilla a tus bebidas. Ideal para el Vanilla Latte, este jarabe resalta la suavidad de la leche vaporizada y complementa el amargor del espresso, creando una experiencia deliciosa.'
         ),
       ],
       publicado: true,
@@ -146,6 +156,7 @@ class _RecetasPageState extends State<RecetasPage> {
           fechaCreacion: DateTime(2023, 7, 18, 3, 40),
         ),
       ],
+      productosRecomendados: [],
       publicado: true,
     ),
     Receta(
@@ -191,6 +202,15 @@ class _RecetasPageState extends State<RecetasPage> {
           autor: 'Fernando Méndez',
           texto: 'Demasiado dulce para mí, pero bien.',
           fechaCreacion: DateTime(2023, 8, 15, 18, 30),
+        ),
+      ],
+      productosRecomendados: [
+        Producto(
+          id: '1',
+          imagen: 'assets/images/hojas_de_menta_fresca.png',
+          nombre: 'Hojas de Menta Fresca',
+          tipo: 'Hierba aromática',
+          descripcion: 'Utilizadas como decoración y para añadir frescura a bebidas como el "Espumoso con Menta", las hojas de menta fresca ofrecen un toque aromático y visual, proporcionando un contraste refrescante con la calidez del espresso y la crema espumosa.'
         ),
       ],
       publicado: true,
@@ -241,6 +261,15 @@ class _RecetasPageState extends State<RecetasPage> {
           fechaCreacion: DateTime(2023, 9, 10, 23, 30),
         ),
       ],
+      productosRecomendados: [
+        Producto(
+          id: '1',
+          imagen: 'assets/images/cacao_en_polvo.png',
+          nombre: 'Cacao en Polvo',
+          tipo: 'Polvo de chocolate',
+          descripcion: 'Perfecto para recetas que incluyen chocolate, como el Mocha. El cacao en polvo sin azúcar le da un sabor profundo y auténtico a chocolate a tus bebidas, equilibrando la dulzura del jarabe de chocolate con un toque más fuerte y natural.'
+        ),
+      ],
       publicado: true,
     ),
   ];
@@ -267,11 +296,6 @@ class _RecetasPageState extends State<RecetasPage> {
         return receta.nombre.toLowerCase().contains(query); // Filtrar por nombre
       }).toList();
     });
-  }
-
-  // Método para obtener recetas
-  List<Receta> getRecetas() {
-    return recetas;
   }
   
   @override

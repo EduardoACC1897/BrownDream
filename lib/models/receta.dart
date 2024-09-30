@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'comentario.dart';
+import 'producto.dart';
 
 // Clase Receta
 class Receta {
@@ -15,6 +16,7 @@ class Receta {
   final List<String> _ingredientes;
   final List<String> _guiaPreparacion;
   final List<Comentario> _comentarios;
+  final List<Producto> _productosRecomendados;
   bool _favorito;
   final bool _publicado;
 
@@ -28,9 +30,10 @@ class Receta {
     required String tecnicaExtraccion,
     required int tiempoPreparacion,
     required String tipoGrano,
-    required List<String> ingredientes,
     required List<String> guiaPreparacion,
+    required List<String> ingredientes,
     List<Comentario>? comentarios,
+    List <Producto> productosRecomendados  = const [],
     bool favorito = false,
     bool publicado = false,
   })  : _id = id,
@@ -42,13 +45,13 @@ class Receta {
         _tecnicaExtraccion = tecnicaExtraccion,
         _tiempoPreparacion = tiempoPreparacion,
         _tipoGrano = tipoGrano,
-        _ingredientes = ingredientes,
         _guiaPreparacion = guiaPreparacion,
+        _ingredientes = ingredientes,
+        _comentarios = comentarios ?? [],
+        _productosRecomendados = productosRecomendados,
         _favorito = favorito,
-        _publicado = publicado,
-        _comentarios = comentarios ?? [];
+        _publicado = publicado;   
 
-  // Métodos de acceso (getters) para los atributos
   String get id => _id;
   String get propietario => _propietario;
   String get imagen => _imagen;
@@ -58,9 +61,10 @@ class Receta {
   String get tecnicaExtraccion => _tecnicaExtraccion;
   int get tiempoPreparacion => _tiempoPreparacion;
   String get tipoGrano => _tipoGrano;
-  List<String> get ingredientes => List.unmodifiable(_ingredientes);
   List<String> get guiaPreparacion => List.unmodifiable(_guiaPreparacion);
+  List<String> get ingredientes => List.unmodifiable(_ingredientes);
   List<Comentario> get comentarios => List.unmodifiable(_comentarios);
+  List<Producto> get productosRecomendados => List.unmodifiable(_productosRecomendados);
   bool get favorito => _favorito;
   bool get publicado => _publicado;
 
