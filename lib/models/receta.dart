@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'comentario.dart';
 
 // Clase Receta
 class Receta {
   final String _id;
+  final String _propietario;
   final String _imagen;
   final double _calificacionPromedio;
   final String _nombre;
@@ -12,11 +14,13 @@ class Receta {
   final String _tipoGrano;
   final List<String> _ingredientes;
   final List<String> _guiaPreparacion;
+  final List<Comentario> _comentarios;
   bool _favorito;
   final bool _publicado;
 
   Receta({
     required String id,
+    required String propietario,
     required String imagen,
     required double calificacionPromedio,
     required String nombre,
@@ -26,10 +30,12 @@ class Receta {
     required String tipoGrano,
     required List<String> ingredientes,
     required List<String> guiaPreparacion,
+    List<Comentario>? comentarios,
     bool favorito = false,
     bool publicado = false,
   })  : _id = id,
         _imagen = imagen,
+        _propietario = propietario,
         _calificacionPromedio = calificacionPromedio,
         _nombre = nombre,
         _descripcion = descripcion,
@@ -39,10 +45,12 @@ class Receta {
         _ingredientes = ingredientes,
         _guiaPreparacion = guiaPreparacion,
         _favorito = favorito,
-        _publicado = publicado;
+        _publicado = publicado,
+        _comentarios = comentarios ?? [];
 
-  // Métodos públicos para acceder a los atributos privados
+  // Métodos de acceso (getters) para los atributos
   String get id => _id;
+  String get propietario => _propietario;
   String get imagen => _imagen;
   double get calificacionPromedio => _calificacionPromedio;
   String get nombre => _nombre;
@@ -52,6 +60,7 @@ class Receta {
   String get tipoGrano => _tipoGrano;
   List<String> get ingredientes => List.unmodifiable(_ingredientes);
   List<String> get guiaPreparacion => List.unmodifiable(_guiaPreparacion);
+  List<Comentario> get comentarios => List.unmodifiable(_comentarios);
   bool get favorito => _favorito;
   bool get publicado => _publicado;
 

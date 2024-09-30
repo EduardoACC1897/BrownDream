@@ -1,23 +1,10 @@
 import 'package:flutter/material.dart';
 
 // Página Inicio
-class InicioPage extends StatefulWidget {
+class InicioPage extends StatelessWidget {
   const InicioPage({super.key, required this.title});
 
   final String title;
-
-  @override
-  State<InicioPage> createState() => _InicioPageState();
-}
-
-class _InicioPageState extends State<InicioPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +15,16 @@ class _InicioPageState extends State<InicioPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times on Inicio Page:',
-                style: TextStyle(color: Colors.white), // Color blanco texto
+              // Icono grande
+              Image.asset(
+                'assets/icons/inicio_icon.png',
+                height: 250,
+                width: 250,
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white), // Color blanco texto
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

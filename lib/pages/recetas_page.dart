@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
+import '/models/comentario.dart';
 import 'receta_detail_page.dart';
 
 // Página Receta
@@ -19,6 +20,7 @@ class _RecetasPageState extends State<RecetasPage> {
   List<Receta> recetas = [
     Receta(
       id: '1',
+      propietario: 'SYSTEM',
       nombre: 'Vanilla Latte',
       descripcion: 'Un delicioso y cremoso café que combina espresso con leche vaporizada y jarabe de vainilla, ideal para los amantes de los sabores dulces.',
       imagen: 'assets/images/vanilla_latte.png',
@@ -39,10 +41,31 @@ class _RecetasPageState extends State<RecetasPage> {
         'Verter la leche vaporizada sobre el espresso y el jarabe.',
         'Agregar espuma de leche en la parte superior si lo deseas.',
       ],
+      comentarios: [
+        Comentario(
+          id: '1',
+          autor: 'Ana Pérez',
+          texto: '¡Delicioso! Perfecto para un desayuno.',
+          fechaCreacion: DateTime(2023, 5, 14, 9, 30),
+        ),
+        Comentario(
+          id: '2',
+          autor: 'Luis García',
+          texto: 'Me encanta el sabor de la vainilla, lo hago todos los fines de semana.',
+          fechaCreacion: DateTime(2023, 5, 20, 10, 20),
+        ),
+        Comentario(
+          id: '3',
+          autor: 'María Rodríguez',
+          texto: 'Un poco dulce para mi gusto, pero sigue siendo bueno.',
+          fechaCreacion: DateTime(2023, 5, 22, 12, 30),
+        ),
+      ],
       publicado: true,
     ),
     Receta(
       id: '2',
+      propietario: 'SYSTEM',
       nombre: 'Cappuccino',
       descripcion: 'Un clásico café italiano que mezcla espresso con partes iguales de leche vaporizada y espuma de leche, creando una textura cremosa y rica.',
       imagen: 'assets/images/cappuccino.png',
@@ -62,10 +85,31 @@ class _RecetasPageState extends State<RecetasPage> {
         'Cubrir con espuma de leche.',
         'Espolvorear canela o cacao en polvo por encima si se desea.',
       ],
+      comentarios: [
+        Comentario(
+          id: '1',
+          autor: 'Carlos Jiménez',
+          texto: 'El mejor cappuccino que he probado, muy cremoso.',
+          fechaCreacion: DateTime(2023, 6, 10, 5, 40),
+        ),
+        Comentario(
+          id: '2',
+          autor: 'Elena Ruiz',
+          texto: 'Ideal para acompañar con un croissant.',
+          fechaCreacion: DateTime(2023, 6, 15, 14, 10),
+        ),
+        Comentario(
+          id: '3',
+          autor: 'Ricardo Soto',
+          texto: 'Me gusta la textura, pero prefiero menos espuma.',
+          fechaCreacion: DateTime(2023, 6, 18, 22, 50),
+        ),
+      ],
       publicado: true,
     ),
     Receta(
       id: '3',
+      propietario: 'Eduardo Cabezas',
       nombre: 'Americano',
       descripcion: 'Un café simple y fuerte que se prepara añadiendo agua caliente a un espresso, manteniendo su robustez y sabor característico.',
       imagen: 'assets/images/americano.png',
@@ -82,10 +126,31 @@ class _RecetasPageState extends State<RecetasPage> {
         'Añadir agua caliente al espresso al gusto, generalmente entre 180 ml.',
         'Remover suavemente y disfrutar.',
       ],
+      comentarios: [
+        Comentario(
+          id: '1',
+          autor: 'Sofia Hernández',
+          texto: 'Un clásico, nunca falla.',
+          fechaCreacion: DateTime(2023, 7, 5, 10, 30),
+        ),
+        Comentario(
+          id: '2',
+          autor: 'Juan Pérez',
+          texto: 'Prefiero mi café más fuerte, pero es una buena opción.',
+          fechaCreacion: DateTime(2023, 7, 12, 11, 20),
+        ),
+        Comentario(
+          id: '3',
+          autor: 'Laura Castro',
+          texto: 'Sencillo y delicioso, perfecto para la tarde.',
+          fechaCreacion: DateTime(2023, 7, 18, 3, 40),
+        ),
+      ],
       publicado: true,
     ),
     Receta(
       id: '4',
+      propietario: 'Eduardo Cabezas',
       nombre: 'Espumoso con Menta',
       descripcion: 'Una refrescante combinación de espresso y crema espumosa con un toque de menta, ideal para disfrutar en cualquier momento del día.',
       imagen: 'assets/images/espumoso_con_menta.png',
@@ -108,10 +173,31 @@ class _RecetasPageState extends State<RecetasPage> {
         'Agregar espuma de leche en la parte superior si lo deseas.',
         'Decorar con hojas de menta fresca antes de servir.',
       ],
+      comentarios: [
+        Comentario(
+          id: '1',
+          autor: 'Martín López',
+          texto: 'Refrescante y perfecto para el verano.',
+          fechaCreacion: DateTime(2023, 8, 2, 10, 10, 10),
+        ),
+        Comentario(
+          id: '2',
+          autor: 'Gabriela Torres',
+          texto: '¡Me encanta la menta! Sabe increíble.',
+          fechaCreacion: DateTime(2023, 8, 8, 4, 15),
+        ),
+        Comentario(
+          id: '3',
+          autor: 'Fernando Méndez',
+          texto: 'Demasiado dulce para mí, pero bien.',
+          fechaCreacion: DateTime(2023, 8, 15, 18, 30),
+        ),
+      ],
       publicado: true,
     ),
     Receta(
       id: '5',
+      propietario: 'Manuel Moscoso',
       nombre: 'Mocha',
       descripcion: 'Un delicioso café que combina espresso con chocolate y leche, creando una bebida rica y cremosa.',
       imagen: 'assets/images/mocha.png',
@@ -134,6 +220,26 @@ class _RecetasPageState extends State<RecetasPage> {
         'Verter la leche vaporizada sobre la mezcla de espresso y chocolate.',
         'Agregar espuma de leche en la parte superior si lo deseas.',
         'Decorar con chispas de chocolate antes de servir.',
+      ],
+      comentarios: [
+        Comentario(
+          id: '1',
+          autor: 'Claudia Silva',
+          texto: 'Un postre en forma de bebida, me encanta.',
+          fechaCreacion: DateTime(2023, 9, 1, 19, 20),
+        ),
+        Comentario(
+          id: '2',
+          autor: 'Diego Romero',
+          texto: 'Ideal para los amantes del chocolate.',
+          fechaCreacion: DateTime(2023, 9, 5, 20, 30),
+        ),
+        Comentario(
+          id: '3',
+          autor: 'Patricia Vargas',
+          texto: 'Demasiado dulce para mí, prefiero menos chocolate.',
+          fechaCreacion: DateTime(2023, 9, 10, 23, 30),
+        ),
       ],
       publicado: true,
     ),
@@ -163,6 +269,11 @@ class _RecetasPageState extends State<RecetasPage> {
     });
   }
 
+  // Método para obtener recetas
+  List<Receta> getRecetas() {
+    return recetas;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +325,7 @@ class _RecetasPageState extends State<RecetasPage> {
               ),
             ),
             Expanded(
-              // Usar ListView para permitir el desplazamiento
+              // ListView para permitir el desplazamiento
               child: ListView(
                 children: filteredRecetas.where((receta) => receta.publicado).map((receta) {
                   return GestureDetector(

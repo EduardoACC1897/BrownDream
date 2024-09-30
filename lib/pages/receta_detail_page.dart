@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
+import 'comentario_page.dart';
 
 // Página RecetaDetail
 class RecetaDetailPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
       body: Container(
         color: const Color(0xFF8D4925), // Color de fondo
         padding: const EdgeInsets.all(16.0),
-        // Usar ListView para permitir el desplazamiento
+        // ListView para permitir el desplazamiento
         child: ListView(
           children: [
             // Imagen de la receta
@@ -70,11 +71,15 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                   ),
                 ),
                 // Botón de comentarios
+                // Modifica el botón de comentarios en RecetaDetailPage
                 ElevatedButton(
                   onPressed: () {
-                    // Acción de comentarios
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Comentario agregado')),
+                    // Navegar a la página de comentarios
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ComentarioPage(receta: widget.receta),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -117,6 +122,44 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
             ),
             const SizedBox(height: 16.0),
             // Información adicional de la receta
+            // Comprobar si el propietario no es "SYSTEM" antes de mostrar el mensaje
+            if (widget.receta.propietario != "SYSTEM") ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Texto que muestra el propietario
+                  Text(
+                    'Creada por: ${widget.receta.propietario}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white, // Color blanco para el texto
+                    ),
+                  ),
+                  // Icono de editar
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: Colors.white), // Icono de editar
+                    onPressed: () {
+                      // Acción al presionar el icono de editar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Editando receta')),
+                      );
+                    },
+                  ),
+                  // Icono de borrar
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.white), // Icono de borrar
+                    onPressed: () {
+                      // Acción al presionar el icono de borrar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Receta borrada')),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+            const SizedBox(height: 16.0),
             const Text(
               'Descripción',
               style: TextStyle(
