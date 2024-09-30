@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'inicio_page.dart'; // Asegúrate de importar las páginas que creaste
+import 'inicio_page.dart';
 import 'recetas_page.dart';
 import 'perfil_page.dart';
 
-class MainScreen extends StatefulWidget { // Cambio de MyHomePage a MainScreen
-  const MainScreen({super.key, required this.title});
+class Navegation extends StatefulWidget {
+  const Navegation({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MainScreen> createState() => _MainScreenState(); // Cambio del nombre del estado
+  State<Navegation> createState() => _NavegationState();
 }
 
-class _MainScreenState extends State<MainScreen> { // Cambio del nombre del estado
+class _NavegationState extends State<Navegation> {
   int _selectedIndex = 0;
 
   // Lista de las páginas que se mostrarán en el BottomNavigationBar
@@ -35,10 +35,10 @@ class _MainScreenState extends State<MainScreen> { // Cambio del nombre del esta
         backgroundColor: const Color(0xFF8D4925),
         title: Text(
           widget.title,
-          style: const TextStyle(color: Color(0xFFFFFFFF)),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
-      body: _pages[_selectedIndex], // Cambia la pantalla según el índice seleccionado
+      body: _pages[_selectedIndex],
 
       // Implementación del BottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> { // Cambio del nombre del esta
           ),
         ],
         currentIndex: _selectedIndex, // Establece el índice actual
-        selectedItemColor: const Color(0xFFFFFFFF), // Color del ítem seleccionado
+        selectedItemColor: Colors.white, // Color del ítem seleccionado
         onTap: _onItemTapped, // Establece el nuevo índice cuando se presiona un ítem
       ),
     );

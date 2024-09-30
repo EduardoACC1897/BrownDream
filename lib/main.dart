@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/main_screen.dart';
+import 'pages/navegation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Nunito', // Fuente global para la App
         useMaterial3: true,
       ),
-      home: const MainScreen(title: 'BrownDream'), // MainScreen como la página inicial
+      home: const Navegation(title: 'BrownDream'), // MainScreen como la página inicial
     );
   }
 }
