@@ -36,4 +36,4 @@ BrownDream es una aplicación desarrollada en Flutter que aborda la necesidad de
 
 A continuación, encontrarás el enlace al video en el que se presenta todo el trabajo realizado.
 
-[video de exposición del trabajo realizado](link_del_video)
+[video de exposición del trabajo realizado](https://youtu.be/IvAhdl_PyyU)
