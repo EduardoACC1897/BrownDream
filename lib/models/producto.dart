@@ -26,9 +26,10 @@ class Producto {
   String get tipo => _tipo;
   String get descripcion=> _descripcion;
 
+  // Métodos para mostrar un mensaje de que se abrió un enlace al producto
   void enlaceProducto(BuildContext context) {
     const snackBar = SnackBar(
-      content: Text('Abriendo enlaza al producto'),
+      content: Text('Abriendo enlace al producto'),
       duration: Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);

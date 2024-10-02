@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import '/models/usuario.dart';
-import 'perfil_detail_page.dart'; // Importar la nueva pantalla
+import 'perfil_detail_page.dart';
+import 'favoritos_page.dart';
+import 'mis_recetas_page.dart';
+import 'mis_comentarios_page.dart';
 
+// Página Perfil
 class PerfilPage extends StatefulWidget {
   const PerfilPage({super.key, required this.title});
 
@@ -82,6 +86,71 @@ class _PerfilPageState extends State<PerfilPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF8D4925),
               ),
+            ),
+            const SizedBox(height: 40),
+            // Botones de acciones
+            Column(
+              children: [
+                // Botón "Favoritos"
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FavoritosPage(usuario: _usuario)),
+                    );
+                  },
+                  icon: const Icon(Icons.favorite, color: Colors.white, size: 32),
+                  label: const Text(
+                    'Favoritos',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF8D4925),
+                    minimumSize: const Size.fromHeight(70),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Botón "Mis Recetas"
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MisRecetasPage(usuario: _usuario,)),
+                    );
+                  },
+                  icon: const Icon(Icons.receipt, color: Colors.white, size: 32),
+                  label: const Text(
+                    'Mis Recetas',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF8D4925),
+                    minimumSize: const Size.fromHeight(70),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Botón "Mis Comentarios"
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MisComentariosPage(usuario: _usuario)),
+                    );
+                  },
+                  icon: const Icon(Icons.comment, color: Colors.white, size: 32),
+                  label: const Text(
+                    'Mis Comentarios',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF8D4925),
+                    minimumSize: const Size.fromHeight(70),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

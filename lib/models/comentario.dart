@@ -22,9 +22,10 @@ class Comentario {
   String get autor => _autor;
   DateTime get fechaCreacion => _fechaCreacion;
 
+  // Métodos para mostrar un mensaje de que el comentario se editó
   void modificarComentario(BuildContext context) {
     const snackBar = SnackBar(
-      content: Text('Comentario modificado'),
+      content: Text('Comentario editado'),
       duration: Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);

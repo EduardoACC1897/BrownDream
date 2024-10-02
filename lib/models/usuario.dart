@@ -29,7 +29,6 @@ class Usuario {
         _fotoPerfil = fotoPerfil,
         _preferencias = preferencias ?? [];
 
-  // Getters
   String get id => _id;
   String get nombre => _nombre;
   String get genero => _genero;
@@ -39,7 +38,7 @@ class Usuario {
   String get fotoPerfil => _fotoPerfil;
   List<String> get preferencias => _preferencias;
 
-  // Mostrar mensaje pequeño de que el usuario edito su perfil
+  // Método para mostrar un mensaje de que el usuario edito su perfil
   void editarPerfil(BuildContext context) {
     const snackBar = SnackBar(
       content: Text('Cambios guardados'),

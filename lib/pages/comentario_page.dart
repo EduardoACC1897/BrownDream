@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
 
+// Página de Comentario
 class ComentarioPage extends StatelessWidget {
   final Receta receta;
 
@@ -31,28 +32,55 @@ class ComentarioPage extends StatelessWidget {
 
             return Card(
               margin: const EdgeInsets.symmetric(vertical: 8.0),
-              color: const Color(0xFF8D4925), // Color de fondo de la tarjeta
+              color: const Color(0xFF8D4925),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Título con el autor y la fecha
+                    // Título con el autor y la fecha, y los iconos de editar/borrar si es el propietario
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          comentario.autor,
-                          style: const TextStyle(
-                            color: Colors.white, // Color del texto
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              comentario.autor,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            // Si el comentario es del propietario, mostrar los íconos
+                            if (comentario.autor == 'Eduardo Cabezas')
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.edit, color: Colors.white),
+                                    onPressed: () {
+                                      comentario.modificarComentario(context);
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete, color: Colors.white),
+                                    onPressed: () {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Comentario borrado'),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                          ],
                         ),
                         Text(
-                          fechaHoraMinuto, // Muestra solo la fecha y hora sin segundos
+                          fechaHoraMinuto, // Muestrar solo la fecha, hora y minutos
                           style: const TextStyle(
-                            color: Colors.white70, // Color del texto de la fecha
+                            color: Colors.white70,
                             fontSize: 14,
                           ),
                         ),
@@ -63,7 +91,7 @@ class ComentarioPage extends StatelessWidget {
                     Text(
                       comentario.texto,
                       style: const TextStyle(
-                        color: Colors.white, // Color del texto del comentario
+                        color: Colors.white,
                         fontSize: 14,
                       ),
                     ),

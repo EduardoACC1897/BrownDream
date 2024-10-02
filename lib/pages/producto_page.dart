@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/producto.dart';
 
+// Página Producto
 class ProductoPage extends StatelessWidget {
   final Producto producto;
 
@@ -11,10 +12,10 @@ class ProductoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(producto.nombre, style: const TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF8D4925), // Color de fondo del AppBar
+        backgroundColor: const Color(0xFF8D4925),
       ),
       body: Container(
-        color: const Color(0xFF8D4925), // Color de fondo del cuerpo
+        color: const Color(0xFF8D4925),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,14 +23,14 @@ class ProductoPage extends StatelessWidget {
             Image.asset(producto.imagen),
             const SizedBox(height: 16),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Para alinear el texto y el botón
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
                   'Descripción',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white), // Encabezado en negrita
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.link, color: Colors.white), // Ícono de enlace en color blanco
+                  icon: const Icon(Icons.link, color: Colors.white),
                   onPressed: () {
                     producto.enlaceProducto(context);
                   },
@@ -39,12 +40,12 @@ class ProductoPage extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               producto.descripcion,
-              style: const TextStyle(fontSize: 18, color: Colors.white), // Letras blancas
+              style: const TextStyle(fontSize: 18, color: Colors.white),
             ),
             const SizedBox(height: 16),
             Text(
               'Tipo: ${producto.tipo}',
-              style: const TextStyle(fontSize: 16, color: Colors.white), // Letras blancas
+              style: const TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
         ),

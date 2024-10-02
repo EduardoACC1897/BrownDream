@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/usuario.dart';
 
+// Página PerfilDetail
 class PerfilDetailPage extends StatelessWidget {
   final Usuario usuario;
 
@@ -10,12 +11,12 @@ class PerfilDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalles del Perfil'),
-        backgroundColor: const Color(0xFF8D4925), // Color de fondo de la AppBar
-        foregroundColor: Colors.white, // Color del texto en la AppBar
+        title: const Text('Editar Perfil'),
+        backgroundColor: const Color(0xFF8D4925),
+        foregroundColor: Colors.white,
       ),
       body: Container(
-        color: const Color(0xFFCD966C), // Color de fondo
+        color: const Color(0xFFCD966C),
         padding: const EdgeInsets.all(16.0),
         child: ListView( // Usar ListView para manejar el contenido
           children: [
@@ -60,19 +61,19 @@ class PerfilDetailPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Botón para guardar cambios
-            Center( // Centrar el botón en la pantalla
+            Center(
               child: SizedBox(
-                width: 200, // Ancho personalizado para el botón
+                width: 200,
                 child: ElevatedButton(
                   onPressed: () {
                     usuario.editarPerfil(context);
-                    Navigator.pop(context); // Volver a la página anterior
+                    Navigator.pop(context);
                   },
-                  child: const Text('Guardar cambios'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8D4925), // Color marrón para el botón
-                    foregroundColor: Colors.white, // Texto en blanco
+                    backgroundColor: const Color(0xFF8D4925),
+                    foregroundColor: Colors.white,
                   ),
+                  child: const Text('Guardar cambios'),
                 ),
               ),
             ),

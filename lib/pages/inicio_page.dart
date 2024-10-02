@@ -44,7 +44,7 @@ class _InicioPageState extends State<InicioPage> {
       comentarios: [
         Comentario(
           id: '1',
-          autor: 'Ana Pérez',
+          autor: 'Eduardo Cabezas',
           texto: '¡Delicioso! Perfecto para un desayuno.',
           fechaCreacion: DateTime(2023, 5, 14, 9, 30),
         ),
@@ -169,7 +169,7 @@ class _InicioPageState extends State<InicioPage> {
         ),
         Comentario(
           id: '3',
-          autor: 'Patricia Vargas',
+          autor: 'Eduardo Cabezas',
           texto: 'Demasiado dulce para mí, prefiero menos chocolate.',
           fechaCreacion: DateTime(2023, 9, 10, 23, 30),
         ),

@@ -68,7 +68,7 @@ class Receta {
   bool get favorito => _favorito;
   bool get publicado => _publicado;
 
-  // Métodos para modificar atributos
+// Métodos para mostrar un mensaje de que se añadió la receta a favoritos
   void marcarFavorito(BuildContext context) {
     _favorito = true;
     final snackBar = SnackBar(
@@ -78,6 +78,7 @@ class Receta {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  // Métodos para mostrar un mensaje de que se quitó la receta a favoritos
   void quitarFavorito(BuildContext context) {
     _favorito = false;
     final snackBar = SnackBar(
@@ -87,7 +88,7 @@ class Receta {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  // Mostrar mensaje pequeño de que la receta se compartió
+  // Método para mostrar un mensaje de que la receta se compartió
   void compartirReceta(BuildContext context) {
     final snackBar = SnackBar(
       content: Text('Receta "$nombre" compartida'),
@@ -96,7 +97,7 @@ class Receta {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  // Mostrar mensaje pequeño de que la receta se calificó
+  // Método para mostrar un mensaje de que la receta se calificó
   void calificarReceta(BuildContext context, int calificacion) {
     final snackBar = SnackBar(
       content: Text('Receta "$_nombre" calificada con $calificacion estrellas'),

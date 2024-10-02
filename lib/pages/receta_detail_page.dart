@@ -26,12 +26,12 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
       appBar: AppBar(
         title: Text(
           widget.receta.nombre,
-          style: const TextStyle(color: Colors.white), // Color blanco para el texto del título
+          style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF8D4925), // Color de la AppBar
+        backgroundColor: const Color(0xFF8D4925),
       ),
       body: Container(
-        color: const Color(0xFF8D4925), // Color de fondo
+        color: const Color(0xFF8D4925),
         padding: const EdgeInsets.all(16.0),
         // ListView para permitir el desplazamiento
         child: ListView(
@@ -52,9 +52,9 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                   children: [
                     Text(
                       widget.receta.calificacionPromedio.toString(),
-                      style: const TextStyle(color: Colors.white), // Color blanco para el texto
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    const Icon(Icons.star, color: Colors.amber), // Color ambar para la estrella
+                    const Icon(Icons.star, color: Colors.amber),
                   ],
                 ),
                 // Botón de calificar
@@ -64,11 +64,11 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                     widget.receta.calificarReceta(context, 5);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFCD966C), // Color del botón
+                    backgroundColor: const Color(0xFFCD966C),
                   ),
                   child: const Text(
                     'Calificar',
-                    style: TextStyle(color: Colors.white), // Color del texto
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 // Botón de comentarios
@@ -83,18 +83,18 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFCD966C), // Color del botón
+                    backgroundColor: const Color(0xFFCD966C),
                   ),
                   child: const Text(
                     'Comentarios',
-                    style: TextStyle(color: Colors.white), // Color del texto
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 // Botón de favoritos
                 IconButton(
                   icon: Icon(
                     widget.receta.favorito ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.white, // Color del corazón
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     // Cambiar el estado de favorito
@@ -119,7 +119,6 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               ],
             ),
             const SizedBox(height: 16.0),
-            // Información adicional de la receta
             // Comprobar si el propietario no es "SYSTEM" antes de mostrar el mensaje
             if (widget.receta.propietario != "SYSTEM") ...[
               Row(
@@ -131,7 +130,7 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white, // Color blanco para el texto
+                      color: Colors.white,
                     ),
                   ),
                   if(widget.receta.propietario == "Eduardo Cabezas") ...{
@@ -165,13 +164,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             Text(
               widget.receta.descripcion,
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 16.0),
             const Text(
@@ -179,13 +178,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             Text(
               widget.receta.tecnicaExtraccion,
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 16.0),
             const Text(
@@ -193,13 +192,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             Text(
               '${widget.receta.tiempoPreparacion} minutos',
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 16.0),
             const Text(
@@ -207,13 +206,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             Text(
               widget.receta.tipoGrano,
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 16.0),
             const Text(
@@ -221,13 +220,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             ...widget.receta.ingredientes.map((ingrediente) => Text(
               '- $ingrediente',
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             )),
             const SizedBox(height: 16.0),
             const Text(
@@ -235,13 +234,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Color blanco para el texto
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 8.0),
             ...widget.receta.guiaPreparacion.map((paso) => Text(
               '- $paso',
-              style: const TextStyle(color: Colors.white), // Color blanco para el texto
+              style: const TextStyle(color: Colors.white),
             )),
             const SizedBox(height: 16.0),
             // Mostrar recetas recomendadas
@@ -277,7 +276,6 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                 ),
               ],
               const SizedBox(height: 16.0),
-
           ],
         ),
       ),

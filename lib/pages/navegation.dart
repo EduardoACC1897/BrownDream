@@ -3,6 +3,7 @@ import 'inicio_page.dart';
 import 'recetas_page.dart';
 import 'perfil_page.dart';
 
+// Página Navegation
 class Navegation extends StatefulWidget {
   const Navegation({super.key, required this.title});
 

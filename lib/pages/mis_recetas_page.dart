@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import '/models/receta.dart';
 import '/models/comentario.dart';
 import '/models/producto.dart';
+import '/models/usuario.dart';
 import 'receta_detail_page.dart';
 
-// Página Recetas
-class RecetasPage extends StatefulWidget {
-  const RecetasPage({super.key, required this.title});
+// Página MisRecetas
+class MisRecetasPage extends StatefulWidget {
+  const MisRecetasPage({super.key, required this.usuario});
 
-  final String title;
+  final Usuario usuario;
 
   @override
-  State<RecetasPage> createState() => _RecetasPageState();
+  State<MisRecetasPage> createState() => _MisRecetasPageState();
 }
 
-class _RecetasPageState extends State<RecetasPage> {
+class _MisRecetasPageState extends State<MisRecetasPage> {
   // Controlador para la búsqueda
   final TextEditingController _searchController = TextEditingController();
   // Lista de recetas
@@ -300,144 +301,177 @@ class _RecetasPageState extends State<RecetasPage> {
   
   @override
   Widget build(BuildContext context) {
+    // Filtrar las recetas que están marcadas como favoritas
+    final recetasCreadas = filteredRecetas.where((receta) => receta.publicado && receta.propietario == widget.usuario.nombre);
+    
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Mis recetas',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF8D4925),
+      ),
       body: Container(
         color: const Color(0xFFCD966C),
         child: Column(
           children: [
-            // Barra de búsqueda
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: const InputDecoration(
-                        labelText: 'Buscar recetas',
-                        labelStyle: TextStyle(color: Colors.white),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+            // Mostrar la barra de búsqueda solo si hay recetas creadas
+            if (recetasCreadas.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: const InputDecoration(
+                          labelText: 'Buscar recetas',
+                          labelStyle: TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          prefixIcon: Icon(Icons.search, color: Colors.white),
+                          filled: true,
+                          fillColor: Color(0xFFCD966C),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        prefixIcon: Icon(Icons.search, color: Colors.white),
-                        filled: true, // Para llenar el fondo del TextField
-                        fillColor: Color(0xFFCD966C),
+                        style: const TextStyle(color: Colors.white),
                       ),
-                      style: const TextStyle(color: Colors.white),
                     ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Filtros aplicados a la búsqueda')),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF8D4925),
-                      foregroundColor: Colors.white,
+                    const SizedBox(width: 8.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Filtros aplicados a la búsqueda')),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF8D4925),
+                        foregroundColor: Colors.white,
+                      ),
+                      child: const Text('Filtrar'),
                     ),
-                    child: const Text('Filtrar'),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+
+            // Mostrar recetas favoritas o mensaje si la lista está vacía
             Expanded(
-              // ListView para permitir el desplazamiento
-              child: ListView(
-                children: filteredRecetas.where((receta) => receta.publicado).map((receta) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Navegar a la pantalla de detalles al tocar cualquier parte de la tarjeta
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RecetaDetailPage(
-                            receta: receta,
-                            onFavoritoToggle: () {
-                              setState(() {}); // Actualiza el estado en RecetasPage
-                            },
-                          ),
+              child: recetasCreadas.isEmpty
+                  ? const Center(
+                      child: Text(
+                        '¡No has creado ninguna receta!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
-                      );
-                    },
-                    child: Card(
-                      elevation: 4,
-                      margin: const EdgeInsets.all(8.0),
-                      color: const Color(0xFF8D4925),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            receta.imagen,
-                            fit: BoxFit.cover,
-                            height: 300,
-                            width: double.infinity,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  receta.nombre,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      receta.calificacionPromedio.toString(),
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                    const Icon(Icons.star, color: Colors.amber),
-                                  ],
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    receta.favorito ? Icons.favorite : Icons.favorite_border,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      // Alternar el estado de favorito
-                                      receta.favorito
-                                          ? receta.quitarFavorito(context)
-                                          : receta.marcarFavorito(context);
-                                    });
+                      ),
+                    )
+                  : ListView(
+                      children: recetasCreadas.map((receta) {
+                        return GestureDetector(
+                          onTap: () {
+                            // Navegar a la pantalla de detalles al tocar cualquier parte de la tarjeta
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RecetaDetailPage(
+                                  receta: receta,
+                                  onFavoritoToggle: () {
+                                    setState(() {}); // Actualiza el estado en FavoritosPage
                                   },
+                                ),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            margin: const EdgeInsets.all(8.0),
+                            color: const Color(0xFF8D4925),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  receta.imagen,
+                                  fit: BoxFit.cover,
+                                  height: 300,
+                                  width: double.infinity,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        receta.nombre,
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            receta.calificacionPromedio.toString(),
+                                            style: const TextStyle(color: Colors.white),
+                                          ),
+                                          const Icon(Icons.star, color: Colors.amber),
+                                        ],
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          receta.favorito ? Icons.favorite : Icons.favorite_border,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            // Alternar el estado de favorito
+                                            receta.favorito
+                                                ? receta.quitarFavorito(context)
+                                                : receta.marcarFavorito(context);
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    receta.descripcion,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              receta.descripcion,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
-              ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Lógica para crear una receta
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Receta creada')),
+          );
+        },
+        backgroundColor: const Color(0xFF8D4925),
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
     );
   }
