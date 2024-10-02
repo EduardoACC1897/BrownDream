@@ -72,7 +72,6 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                   ),
                 ),
                 // Botón de comentarios
-                // Modifica el botón de comentarios en RecetaDetailPage
                 ElevatedButton(
                   onPressed: () {
                     // Navegar a la página de comentarios
@@ -113,10 +112,8 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                 IconButton(
                   icon: const Icon(Icons.share, color: Colors.white),
                   onPressed: () {
-                    // Acción al compartir la receta
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Receta compartida')),
-                    );
+                    // Llama al método compartirReceta de la clase Receta
+                    widget.receta.compartirReceta(context);
                   },
                 ),
               ],
