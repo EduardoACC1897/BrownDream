@@ -66,7 +66,7 @@ class _NavegationState extends State<Navegation> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF8D4925),
+          backgroundColor: const Color(0xFF5C2A16),
           title: Text(
             widget.title,
             style: const TextStyle(color: Colors.white),
@@ -81,7 +81,7 @@ class _NavegationState extends State<Navegation> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color(0xFF8D4925),
+          backgroundColor: const Color(0xFF5C2A16),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
