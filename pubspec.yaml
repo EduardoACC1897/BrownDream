@@ -38,6 +38,8 @@ dependencies:
 
   flutter_native_splash: ^2.4.1
 
+  flutter_launcher_icons: "^0.14.1"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,6 +64,30 @@ flutter_native_splash:
   web: false     # Desactivar en Web
   android_gravity: center  # Colocar el logo en el centro
   fullscreen: true  # Pantalla completa para ocultar la barra de estado
+
+flutter_launcher_icons:
+  android: true        # Generar el ícono para Android
+  ios: true            # Generar el ícono para iOS
+  image_path: "assets/icons/app_icon.png"  # Ruta al archivo de imagen del ícono
+  min_sdk_android: 21  # SDK mínimo de Android
+  remove_alpha_ios: true  # Eliminar transparencia en iOS
+
+  # Opciones adicionales para más plataformas (Web, Windows, macOS)
+  web:
+    generate: true
+    image_path: "assets/icons/app_icon.png"  # Ruta de la imagen para Web
+    background_color: "#ffffff"  # Color de fondo para el ícono web
+    theme_color: "#000000"       # Color de tema para el ícono web
+
+  windows:
+    generate: true
+    image_path: "assets/icons/app_icon.png"  # Ruta de la imagen para Windows
+    icon_size: 48  # Tamaño del ícono de Windows (mín: 48, máx: 256)
+
+  macos:
+    generate: true
+    image_path: "assets/icons/app_icon.png"  # Ruta de la imagen para macOS
+
 # The following section is specific to Flutter packages.
 flutter:
 
