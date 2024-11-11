@@ -38,8 +38,6 @@ dependencies:
 
   flutter_native_splash: ^2.4.1
 
-  flutter_launcher_icons: "^0.14.1"
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -50,6 +48,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+
+  flutter_launcher_icons: "^0.14.1"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,23 +66,25 @@ flutter_native_splash:
   fullscreen: true  # Pantalla completa para ocultar la barra de estado
 
 flutter_launcher_icons:
-  android: true        # Generar el ícono para Android
+  android: "launcher_icon"        # Generar el ícono para Android
   ios: true            # Generar el ícono para iOS
+  remove_alpha_ios: true  # Eliminar transparencia en iOS
   image_path: "assets/icons/app_icon.png"  # Ruta al archivo de imagen del ícono
   min_sdk_android: 21  # SDK mínimo de Android
-  remove_alpha_ios: true  # Eliminar transparencia en iOS
+  adaptive_icon_background: "#FF5C2A16"  # Color de fondo para el ícono adaptativo en Android
+  adaptive_icon_foreground: "assets/icons/app_icon.png"  # Ruta a la imagen del ícono adaptativo en Android
 
   # Opciones adicionales para más plataformas (Web, Windows, macOS)
   web:
     generate: true
     image_path: "assets/icons/app_icon.png"  # Ruta de la imagen para Web
-    background_color: "#ffffff"  # Color de fondo para el ícono web
-    theme_color: "#000000"       # Color de tema para el ícono web
+    background_color: "#FF5C2A16"  # Color de fondo para el ícono web
+    theme_color: "#FF5C2A16"       # Color de tema para el ícono web
 
   windows:
     generate: true
     image_path: "assets/icons/app_icon.png"  # Ruta de la imagen para Windows
-    icon_size: 48  # Tamaño del ícono de Windows (mín: 48, máx: 256)
+    icon_size: 48  # Tamaño del ícono de Windows
 
   macos:
     generate: true
