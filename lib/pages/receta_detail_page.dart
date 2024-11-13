@@ -57,20 +57,6 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                     const Icon(Icons.star, color: Colors.amber),
                   ],
                 ),
-                // Botón de calificar
-                ElevatedButton(
-                  onPressed: () {
-                    // Llama a la función de calificar de la receta
-                    widget.receta.calificarReceta(context, 5);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFCD966C),
-                  ),
-                  child: const Text(
-                    'Calificar',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
                 // Botón de comentarios
                 ElevatedButton(
                   onPressed: () {

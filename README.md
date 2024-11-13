@@ -32,6 +32,10 @@ BrownDream es una aplicación desarrollada en Flutter que aborda la necesidad de
 
 ![Diagrama de clases - BrownDream](diagrama_de_clases_-_browndream.png)
 
+### Diagrama de arquitectura de información
+
+![Diagrama de arquitectura de información - BrownDream](diagrama_de_arquitectura_de_información_-_browndream.png)
+
 ### Video
 
 A continuación, encontrarás el enlace al video en el que se presenta todo el trabajo realizado.
