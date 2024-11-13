@@ -10,7 +10,7 @@ Se han considerado los resultados de la encuesta proporcionada por el equipo de 
 
 - La aplicación debe permitir a los usuarios crear, editar y eliminar recetas de café.
 - La aplicación debe permitir buscar y explorar recetas predefinidas o personalizadas.
-- La aplicación debe proporcionar un filtro de búsqueda, permitiendo a los usuarios seleccionar sus preferencias, tales como técnica de extracción, tiempos de preparación, explorar nuevos ingredientes, tipo de grano y equipo utilizado, ajustando la búsqueda en consecuencia.
+- La aplicación debe proporcionar un sistema de búsqueda para que el usuario pueda encontrar las recetas que desee preparar.
 - La aplicación debe ofrecer guías de preparación para diferentes tipos de café.
 - La aplicación debe permitir a los usuarios poder personalizar las recetas según sus preferencias.
 - La aplicación debe permitir a los usuarios compartir recetas a través del dispositivo.
