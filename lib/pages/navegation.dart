@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'inicio_page.dart';
 import 'mi_barista_page.dart';
 import 'mis_recetas_page.dart';
+import 'opinion_page.dart';
 
 // Página Navegation
 class Navegation extends StatefulWidget {
@@ -21,6 +22,7 @@ class _NavegationState extends State<Navegation> {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
   ];
 
   // Lista de las páginas principales del BottomNavigationBar
@@ -28,6 +30,7 @@ class _NavegationState extends State<Navegation> {
     InicioPage(title: 'Home'),
     MiBaristaPage(title: 'Mi Barista'),
     MisRecetasPage(title: 'Mis Recetas'),
+    OpinionPage(title: 'Opinión'),
   ];
 
   // Método que cambia la pestaña y limpia el historial de la pestaña actual
@@ -78,9 +81,12 @@ class _NavegationState extends State<Navegation> {
             _buildOffstageNavigator(0),
             _buildOffstageNavigator(1),
             _buildOffstageNavigator(2),
+            _buildOffstageNavigator(3),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          // Mantener siempre el color
+          type: BottomNavigationBarType.fixed,
           backgroundColor: const Color(0xFF5C2A16),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -94,6 +100,10 @@ class _NavegationState extends State<Navegation> {
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Mis Recetas',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.comment),
+              label: 'Opinión',
             ),
           ],
           currentIndex: _selectedIndex,
