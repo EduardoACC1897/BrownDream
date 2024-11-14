@@ -3,6 +3,8 @@ import '/models/receta.dart';
 import 'producto_page.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'dart:convert';
 
 // Página RecetaDetail
 class RecetaDetailPage extends StatefulWidget {
@@ -20,6 +22,79 @@ class RecetaDetailPage extends StatefulWidget {
 
 class _RecetaDetailPageState extends State<RecetaDetailPage> {
  
+  late Timer _timer;
+  int _seconds = 0;
+  bool _isRunning = false;
+
+  void _stopTimer() {
+    setState(() {
+      _isRunning = false;
+    });
+    _timer.cancel();
+  }
+
+  void _resetTimer() {
+    setState(() {
+      _seconds = 0;
+      _isRunning = true;
+    });
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds++;
+      });
+    });
+  }
+
+  Future<void> _actualizarDatosReceta() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Recuperar las recetas guardadas
+    String? recetasJson = prefs.getString('recetas');
+
+    if (recetasJson != null) {
+      // Decodificar las recetas guardadas
+      List<dynamic> recetasList = jsonDecode(recetasJson);
+
+      // Buscar la receta con el mismo id que widget.receta.id
+      for (var recetaMap in recetasList) {
+        var receta = Receta.fromMap(recetaMap);
+
+        if (receta.id == widget.receta.id) {
+          // Si encontramos la receta, primero recuperamos el valor de vecesPreparada
+          int vecesPreparadaAlmacenada = prefs.getInt('${receta.id}-vecesPreparada') ?? 0;
+          
+          // Incrementar el valor de vecesPreparada
+          int nuevasVecesPreparada = vecesPreparadaAlmacenada + 1;
+
+          String nuevaFecha = DateTime.now().toIso8601String();
+
+          // Guardar los nuevos valores directamente en SharedPreferences
+          await prefs.setInt('${receta.id}-vecesPreparada', nuevasVecesPreparada);
+          await prefs.setString('${receta.id}-fechaUltimaPreparacion', nuevaFecha);
+
+          // Actualizar el widget
+          setState(() {
+            widget.receta.incrementarVecesPreparada();
+            widget.receta.actualizarFechaUltimaPreparacion();
+          });
+
+          break; // Salimos del bucle después de encontrar y actualizar la receta
+        }
+      }
+    } else {
+      print('No se encontraron recetas guardadas.');
+    }
+  }
+
+  void _toggleTimer() {
+    if (_isRunning) {
+      _stopTimer();
+    } else {
+      _resetTimer();
+      _actualizarDatosReceta(); // Actualizar SharedPreferences y la receta
+    }
+  }
+
  void _compartirReceta() {
   final String contenido = '''
       ${widget.receta.nombre}\n\n
@@ -66,10 +141,34 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
   void initState() {
     super.initState();
     _guardarNombreReceta(); // Guardar el nombre al entrar en la pantalla
+    _timer = Timer(Duration.zero, () {}); // Inicializar _timer con un Timer inactivo
   }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  // Método para formatear la fecha desde una cadena en formato ISO 8601
+String _formatDate(String fecha) {
+  try {
+    DateTime dateTime = DateTime.parse(fecha); // Convertir la cadena a DateTime
+    return '${dateTime.day.toString().padLeft(2, '0')}/'
+           '${dateTime.month.toString().padLeft(2, '0')}/'
+           '${dateTime.year}';
+  } catch (e) {
+    // Si la fecha no se puede parsear correctamente, devolver un valor por defecto
+    return 'Fecha inválida';
+  }
+}
 
  @override
   Widget build(BuildContext context) {
+  // Verificar si fechaUltimaPreparacion es nulo y formatearlo si no lo es
+  final String formattedFechaUltimaPreparacion = widget.receta.fechaUltimaPreparacion != null
+      ? _formatDate(widget.receta.fechaUltimaPreparacion!)
+      : 'No disponible';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -95,14 +194,63 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [               
-                // Botón de compartir
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.white),
-                onPressed: () {
-                  // Llama al método de compartir
-                  _compartirReceta();
-                },
-              ),
+              // Botón de temporizador
+                IconButton(
+                  icon: Icon(
+                    _isRunning ? Icons.pause : Icons.access_time,
+                    color: Colors.white,
+                  ),
+                  onPressed: _toggleTimer,
+                ),
+                // Mostrar el tiempo transcurrido en formato mm:ss
+                Text(
+                  '${(_seconds ~/ 60).toString().padLeft(2, '0')}:${(_seconds % 60).toString().padLeft(2, '0')}',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              // Botón de compartir
+                IconButton(
+                  icon: const Icon(Icons.share, color: Colors.white),
+                  onPressed: () {
+                    // Llama al método de compartir
+                    _compartirReceta();
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 16.0),           
+            // Texto y valor de cantidad de veces preparada
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Cantidad de veces preparada la receta:',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  '${widget.receta.vecesPreparada}',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            // Texto y valor de la fecha de última preparación
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Fecha de última preparación:',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  formattedFechaUltimaPreparacion,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ],
             ),
             const SizedBox(height: 16.0),
@@ -265,6 +413,16 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               const SizedBox(height: 16.0),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Receta creada')),
+          );
+        },
+          backgroundColor: const Color(0xFFCD966C),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
       ),
     );
   }

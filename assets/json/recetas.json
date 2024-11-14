@@ -29,7 +29,9 @@
                 "tipo": "Saborizante",
                 "descripcion": "Un jarabe dulce y aromático que añade un toque de vainilla a tus bebidas. Ideal para el Vanilla Latte, este jarabe resalta la suavidad de la leche vaporizada y complementa el amargor del espresso, creando una experiencia deliciosa."
             }
-        ]
+        ],
+        "vecesPreparada": "0",
+        "fechaUltimaPreparacion": null
     },
     "receta_2": {
         "id": "2",
@@ -52,7 +54,9 @@
             "Cubrir con espuma de leche.",
             "Espolvorear canela o cacao en polvo por encima si se desea."
         ],
-        "productosRecomendados": []
+        "productosRecomendados": [],
+        "vecesPreparada": "0",
+        "fechaUltimaPreparacion": null
     },
     "receta_3": {
         "id": "3",
@@ -72,7 +76,9 @@
             "Añadir agua caliente al espresso al gusto, generalmente entre 180 ml.",
             "Remover suavemente y disfrutar."
         ],
-        "productosRecomendados": []
+        "productosRecomendados": [],
+        "vecesPreparada": "0",
+        "fechaUltimaPreparacion": null
     },
     "receta_4": {
         "id": "4",
@@ -106,7 +112,9 @@
                 "tipo": "Hierba aromática",
                 "descripcion": "Utilizadas como decoración y para añadir frescura a bebidas como el 'Espumoso con Menta', las hojas de menta fresca ofrecen un toque aromático y visual, proporcionando un contraste refrescante con la calidez del espresso y la crema espumosa."
             }
-        ]
+        ],
+        "vecesPreparada": "0",
+        "fechaUltimaPreparacion": null
     },
     "receta_5": {
         "id": "5",
@@ -141,6 +149,8 @@
                 "tipo": "Polvo de chocolate",
                 "descripcion": "Perfecto para recetas que incluyen chocolate, como el Mocha. El cacao en polvo sin azúcar le da un sabor profundo y auténtico a chocolate a tus bebidas, equilibrando la dulzura del jarabe de chocolate con un toque más fuerte y natural."
             }
-        ]
+        ],
+        "vecesPreparada": "0",
+        "fechaUltimaPreparacion": null
     }
 }
