@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import '/models/receta.dart';
 import 'producto_page.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Página RecetaDetail
 class RecetaDetailPage extends StatefulWidget {
   final Receta receta;
-  final Function onFavoritoToggle; // Callback para actualizar el favorito
 
   // Constructor que recibe la receta y el callback
   const RecetaDetailPage({
     super.key,
     required this.receta,
-    required this.onFavoritoToggle, // Inicializa el callback
   });
 
   @override
@@ -24,20 +22,51 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
  
  void _compartirReceta() {
   final String contenido = '''
-    ${widget.receta.nombre}\n\n
-    ${widget.receta.descripcion}\n\n
-    Técnica de Preparación: ${widget.receta.tecnicaExtraccion}\n
-    Tiempo de Preparación: ${widget.receta.tiempoPreparacion} minutos\n
-    Tipo de Grano: ${widget.receta.tipoGrano}\n\n
-    Ingredientes:\n
-    ${widget.receta.ingredientes.join("\n")}\n\n
-    Guía de Preparación:\n
-    ${widget.receta.guiaPreparacion.join("\n")}
-  ''';
+      ${widget.receta.nombre}\n\n
+      ${widget.receta.descripcion}\n\n
+      Técnica de Preparación: ${widget.receta.tecnicaExtraccion}\n
+      Tiempo de Preparación: ${widget.receta.tiempoPreparacion} minutos\n
+      Tipo de Grano: ${widget.receta.tipoGrano}\n\n
+      Ingredientes:\n
+      ${widget.receta.ingredientes.join("\n")}\n\n
+      Guía de Preparación:\n
+      ${widget.receta.guiaPreparacion.join("\n")}
+    ''';
 
-  // Usar el paquete share_plus para compartir el contenido
+    // Usar el paquete share_plus para compartir el contenido
   Share.share(contenido);
-}
+  }
+
+  // Guardar el nombre de la receta en SharedPreferences
+  _guardarNombreReceta() async {
+    final prefs = await SharedPreferences.getInstance();
+    // Recuperar la lista de nombres de recetas ya guardados
+    List<String> nombresRecetas = prefs.getStringList('nombresRecetas') ?? [];
+
+    // Si ya hay 3 nombres guardados, eliminar el más antiguo
+    if (nombresRecetas.length >= 3) {
+      nombresRecetas.removeLast(); // Elimina el nombre más antiguo (última posición)
+    }
+
+    // Verificar si el nombre ya está en alguna posición
+    if (nombresRecetas.contains(widget.receta.nombre)) {
+      // Si el nombre está en la posición 2 o 3, desplazarlo a la posición 1
+      nombresRecetas.remove(widget.receta.nombre);
+      nombresRecetas.insert(0, widget.receta.nombre);
+    } else {
+      // Si el nombre no está en la lista, agregarlo en la posición 1
+      nombresRecetas.insert(0, widget.receta.nombre);
+    }
+
+    // Guardar la lista actualizada en SharedPreferences
+    await prefs.setStringList('nombresRecetas', nombresRecetas);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _guardarNombreReceta(); // Guardar el nombre al entrar en la pantalla
+  }
 
  @override
   Widget build(BuildContext context) {

@@ -22,19 +22,13 @@ class ProductoPage extends StatelessWidget {
           children: [
             Image.asset(producto.imagen),
             const SizedBox(height: 16),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Descripción',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.link, color: Colors.white),
-                  onPressed: () {
-                    producto.enlaceProducto(context);
-                  },
-                ),
+                ),              
               ],
             ),
             const SizedBox(height: 8),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 // Clase Producto
 class Producto {
   final String _id;
@@ -26,12 +24,15 @@ class Producto {
   String get tipo => _tipo;
   String get descripcion=> _descripcion;
 
-  // Métodos para mostrar un mensaje de que se abrió un enlace al producto
-  void enlaceProducto(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('Abriendo enlace al producto'),
-      duration: Duration(seconds: 2),
+  // Método fromMap para convertir un mapa en una instancia de Producto
+  factory Producto.fromMap(Map<String, dynamic> map) {
+    return Producto(
+      id: map['id'] ?? '', // Usa un valor por defecto vacío si la clave no existe
+      imagen: map['imagen'] ?? '',
+      nombre: map['nombre'] ?? '',
+      tipo: map['tipo'] ?? '',
+      descripcion: map['descripcion'] ?? '',
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
 }

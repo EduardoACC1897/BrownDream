@@ -17,48 +17,27 @@ class Navegation extends StatefulWidget {
 class _NavegationState extends State<Navegation> {
   int _selectedIndex = 0;
 
-  // Claves para los navegadores anidados de cada pestaña
-  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-  ];
-
-  // Lista de las páginas principales del BottomNavigationBar
-  static const List<Widget> _pages = <Widget>[
-    InicioPage(title: 'Home'),
-    MiBaristaPage(title: 'Mi Barista'),
-    MisRecetasPage(title: 'Mis Recetas'),
-    OpinionPage(title: 'Opinión'),
-  ];
-
-  // Método que cambia la pestaña y limpia el historial de la pestaña actual
+  // Método que cambia la pestaña
   void _onItemTapped(int index) {
-    FocusScope.of(context).unfocus(); // Quitar el foco de cualquier TextField antes de cambiar de pestaña
-    if (_selectedIndex != index) {
-      _navigatorKeys[_selectedIndex].currentState?.popUntil((route) => route.isFirst);
-      setState(() {
-        _selectedIndex = index;
-      });
-    } else {
-      _navigatorKeys[index].currentState?.popUntil((route) => route.isFirst);
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
-  // Widget que construye el Navigator anidado para cada pestaña
-  Widget _buildOffstageNavigator(int index) {
-    return Offstage(
-      offstage: _selectedIndex != index,
-      child: Navigator(
-        key: _navigatorKeys[index],
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute(
-            builder: (context) => _pages[index],
-          );
-        },
-      ),
-    );
+  // Widget que construye la página seleccionada
+  Widget _buildPage() {
+    switch (_selectedIndex) {
+      case 0:
+        return const InicioPage(title: 'Home');
+      case 1:
+        return const MiBaristaPage(title: 'Mi Barista');
+      case 2:
+        return const MisRecetasPage(title: 'Mis Recetas');
+      case 3:
+        return const OpinionPage(title: 'Opinión');
+      default:
+        return const InicioPage(title: 'Home');
+    }
   }
 
   @override
@@ -75,17 +54,8 @@ class _NavegationState extends State<Navegation> {
             style: const TextStyle(color: Colors.white),
           ),
         ),
-        // Offstage para mantener todos los Navigators pero solo mostrar el seleccionado
-        body: Stack(
-          children: [
-            _buildOffstageNavigator(0),
-            _buildOffstageNavigator(1),
-            _buildOffstageNavigator(2),
-            _buildOffstageNavigator(3),
-          ],
-        ),
+        body: _buildPage(), // Solo muestra la página seleccionada
         bottomNavigationBar: BottomNavigationBar(
-          // Mantener siempre el color
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color(0xFF5C2A16),
           items: const <BottomNavigationBarItem>[

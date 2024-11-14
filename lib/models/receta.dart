@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'producto.dart';
 
 // Clase Receta
@@ -14,7 +13,8 @@ class Receta {
   final List<String> _ingredientes;
   final List<String> _guiaPreparacion;
   final List<Producto> _productosRecomendados;
-
+  int _vecesPreparada = 0;
+  DateTime? _fechaUltimaPreparacion;
   Receta({
     required String id,
     required String propietario,
@@ -37,7 +37,7 @@ class Receta {
         _tipoGrano = tipoGrano,
         _ingredientes = ingredientes,
         _guiaPreparacion = guiaPreparacion,       
-        _productosRecomendados = productosRecomendados; 
+        _productosRecomendados = productosRecomendados;
 
   String get id => _id;
   String get propietario => _propietario;
@@ -50,14 +50,33 @@ class Receta {
   List<String> get ingredientes => List.unmodifiable(_ingredientes);
   List<String> get guiaPreparacion => List.unmodifiable(_guiaPreparacion);
   List<Producto> get productosRecomendados => List.unmodifiable(_productosRecomendados);
+  int get vecesPreparada => _vecesPreparada;
+  DateTime? get fechaUltimaPreparacion => _fechaUltimaPreparacion;
 
-  // Método para mostrar un mensaje de que la receta se compartió
-  void compartirReceta(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text('Receta "$nombre" compartida'),
-      duration: const Duration(seconds: 2),
+  // Métodos para modificar las variables
+  void incrementarVecesPreparada() {
+    _vecesPreparada++;
+  }
+
+  void actualizarFechaUltimaPreparacion() {
+    _fechaUltimaPreparacion = DateTime.now();
+  }
+
+  // Método fromMap para convertir un mapa en una instancia de Receta
+  factory Receta.fromMap(Map<String, dynamic> map) {
+    return Receta(
+      id: map['id'] ?? '', // Usa un valor predeterminado si no existe la clave
+      propietario: map['propietario'] ?? '',
+      imagen: map['imagen'] ?? '',
+      nombre: map['nombre'] ?? '',
+      descripcion: map['descripcion'] ?? '',
+      tecnicaExtraccion: map['tecnicaExtraccion'] ?? '',
+      tiempoPreparacion: map['tiempoPreparacion'] ?? 0,
+      tipoGrano: map['tipoGrano'] ?? '',
+      ingredientes: List<String>.from(map['ingredientes'] ?? []),
+      guiaPreparacion: List<String>.from(map['guiaPreparacion'] ?? []),
+      productosRecomendados: List<Producto>.from(map['productosRecomendados']?.map((x) => Producto.fromMap(x)) ?? []), // Asumiendo que Producto tiene un fromMap
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
 }
