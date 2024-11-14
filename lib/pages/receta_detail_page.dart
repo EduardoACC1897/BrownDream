@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
 import 'producto_page.dart';
+import 'package:share_plus/share_plus.dart';
+
 
 // Página RecetaDetail
 class RecetaDetailPage extends StatefulWidget {
@@ -19,7 +21,25 @@ class RecetaDetailPage extends StatefulWidget {
 }
 
 class _RecetaDetailPageState extends State<RecetaDetailPage> {
-  @override
+ 
+ void _compartirReceta() {
+  final String contenido = '''
+    ${widget.receta.nombre}\n\n
+    ${widget.receta.descripcion}\n\n
+    Técnica de Preparación: ${widget.receta.tecnicaExtraccion}\n
+    Tiempo de Preparación: ${widget.receta.tiempoPreparacion} minutos\n
+    Tipo de Grano: ${widget.receta.tipoGrano}\n\n
+    Ingredientes:\n
+    ${widget.receta.ingredientes.join("\n")}\n\n
+    Guía de Preparación:\n
+    ${widget.receta.guiaPreparacion.join("\n")}
+  ''';
+
+  // Usar el paquete share_plus para compartir el contenido
+  Share.share(contenido);
+}
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,13 +67,13 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [               
                 // Botón de compartir
-                IconButton(
-                  icon: const Icon(Icons.share, color: Colors.white),
-                  onPressed: () {
-                    // Llama al método compartirReceta de la clase Receta
-                    widget.receta.compartirReceta(context);
-                  },
-                ),
+              IconButton(
+                icon: const Icon(Icons.share, color: Colors.white),
+                onPressed: () {
+                  // Llama al método de compartir
+                  _compartirReceta();
+                },
+              ),
               ],
             ),
             const SizedBox(height: 16.0),
