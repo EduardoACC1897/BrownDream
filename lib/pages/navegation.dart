@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'inicio_page.dart';
-import 'recetas_page.dart';
-import 'perfil_page.dart';
+import 'mi_barista_page.dart';
+import 'mis_recetas_page.dart';
 
 // Página Navegation
 class Navegation extends StatefulWidget {
@@ -26,8 +26,8 @@ class _NavegationState extends State<Navegation> {
   // Lista de las páginas principales del BottomNavigationBar
   static const List<Widget> _pages = <Widget>[
     InicioPage(title: 'Home'),
-    RecetasPage(title: 'Recetas'),
-    PerfilPage(title: 'Perfil'),
+    MiBaristaPage(title: 'Mi Barista'),
+    MisRecetasPage(title: 'Mis Recetas'),
   ];
 
   // Método que cambia la pestaña y limpia el historial de la pestaña actual
@@ -89,11 +89,11 @@ class _NavegationState extends State<Navegation> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_cafe),
-              label: 'Recetas',
+              label: 'Mi Barista',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Perfil',
+              label: 'Mis Recetas',
             ),
           ],
           currentIndex: _selectedIndex,

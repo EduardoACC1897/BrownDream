@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '/models/receta.dart';
-import 'comentario_page.dart';
 import 'producto_page.dart';
 
 // Página RecetaDetail
@@ -44,56 +43,9 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
               width: double.infinity,
             ),
             const SizedBox(height: 16.0),
-            // Calificación y estrella, botón de calificar, botón de comentarios y botón de favoritos
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      widget.receta.calificacionPromedio.toString(),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const Icon(Icons.star, color: Colors.amber),
-                  ],
-                ),
-                // Botón de comentarios
-                ElevatedButton(
-                  onPressed: () {
-                    // Navegar a la página de comentarios
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ComentarioPage(receta: widget.receta),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFCD966C),
-                  ),
-                  child: const Text(
-                    'Comentarios',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                // Botón de favoritos
-                IconButton(
-                  icon: Icon(
-                    widget.receta.favorito ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    // Cambiar el estado de favorito
-                    setState(() {
-                      if (widget.receta.favorito) {
-                        widget.receta.quitarFavorito(context); // Usar método para quitar de favoritos
-                      } else {
-                        widget.receta.marcarFavorito(context); // Usar método para marcar como favorito
-                      }
-                    });
-                    widget.onFavoritoToggle(); // Llama al callback para actualizar el estado
-                  },
-                ),
+              children: [               
                 // Botón de compartir
                 IconButton(
                   icon: const Icon(Icons.share, color: Colors.white),
@@ -119,7 +71,7 @@ class _RecetaDetailPageState extends State<RecetaDetailPage> {
                       color: Colors.white,
                     ),
                   ),
-                  if(widget.receta.propietario == "Eduardo Cabezas") ...{
+                  if(widget.receta.propietario == "USER") ...{
                     // Botón de editar
                     IconButton(
                       icon: const Icon(Icons.edit, color: Colors.white),
