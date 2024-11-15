@@ -46,4 +46,4 @@ Se han considerado los resultados de la encuesta proporcionada por el equipo de 
 
 A continuación, encontrarás el enlace al video en el que se presenta todo el trabajo realizado en esta nueva versión.
 
-[Video de exposición del trabajo realizado](https://youtu.be/IvAhdl_PyyU)
+[Video de exposición del trabajo realizado](https://youtu.be/HdW3W1pex8c)
